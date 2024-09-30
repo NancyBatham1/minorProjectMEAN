@@ -1,39 +1,38 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
 import sequelize from '../index.js';
 
-class User extends Model { }
+class Organization extends Model { }
 
-User.init(
+Organization.init(
     {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-        first_name: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        last_name: {
+        address: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        email: {
-            type: DataTypes.STRING,
+        is_active: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true,
             allowNull: false,
-            unique: true
         },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
+        is_delete: {
+            type: DataTypes.ENUM('1', '2', '3'), // Enum with possible values [1 means notDlt, 2 means tempDlt, 3 means PermanatDlt]
         }
     },
     {
         // Other model options go here
         sequelize, // We need to pass the connection instance
-        modelName: 'user', // We need to choose the model name
+        modelName: 'organization', // We need to choose the model name
     },
 );
 
-export default User;
+export default Organization;
 
